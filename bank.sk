@@ -1,4 +1,4 @@
-# Bank Skript?
+# Terrible, we came up with a better bank system!
 
 on break of gold block:
     if player is in region "bankvault":
