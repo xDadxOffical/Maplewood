@@ -1,3 +1,5 @@
+# Unfinished
+
 on place:
     if event-block is furnace:
         if block 2 blocks below event-block is chain:
