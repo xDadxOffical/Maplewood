@@ -1,0 +1,7 @@
+command /market:
+    permission: *
+    aliases: /marketplace, /buy
+    trigger:
+        set metadata tag "marketplace" of player to chest inventory with 6 rows named "Marketplace"
+        set slot 53 of metadata tag "marketplace" of player to gray stained glass pane named "" with custom model data 1002
+        open (metadata tag "marketplace" of player) to player

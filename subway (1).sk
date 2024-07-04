@@ -1,0 +1,127 @@
+    
+# Subway Skript # NOTE TO FUTURE ME 0-8 is first row |  10-18 is second row | 19-27 is third row | and so on and so forth
+
+command /hello:
+    permission: ticket.gui.player
+    trigger:
+        set metadata tag "vanillaGUI" of player to chest inventory with 5 rows named "&a&lSubway System"
+        set slot 0 of metadata tag "vanillaGUI" of player to gold ingot named "&aBank Station"
+        set slot 1 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 2 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 3 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 4 of metadata tag "vanillaGUI" of player to elytra named "&aAirport Station"
+        set slot 5 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 6 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 7 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 8 of metadata tag "vanillaGUI" of player to dark oak log named "&aDark Oak Station"
+        set slot 9 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 10 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 11 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 12 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 13 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 14 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 15 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 16 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 17 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 18 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 19 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 20 of metadata tag "vanillaGUI" of player to sand named "&aBeach Shop Station"
+        set slot 21 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 22 of metadata tag "vanillaGUI" of player to nether star named "&aSpawn Station"
+        set slot 23 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 24 of metadata tag "vanillaGUI" of player to copper ingot named "&aIndustrial Station"
+        set slot 25 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 26 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 27 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 28 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 29 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 30 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 31 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 32 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 33 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 34 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 35 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 36 of metadata tag "vanillaGUI" of player to diamond named "&aMansion Station"
+        set slot 37 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 38 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 39 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 40 of metadata tag "vanillaGUI" of player to golden apple named "&aMedical Station"
+        set slot 41 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 42 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 43 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 44 of metadata tag "vanillaGUI" of player to wolf spawn egg named "&aAnimal Shelter Station"
+        
+        open (metadata tag "vanillaGUI" of player) to player
+        
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        cancel event
+        
+        
+#Animal Shelter
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is wolf spawn egg named "&aAnimal Shelter Station":
+            execute console command "minecraft:tp %player% (coords)"
+            execute console command "eco take %player% 5"
+            send "&aTrain &8| &fWelcome to &aAnimal Shelter Station"
+
+#Bank Station            
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is gold ingot named "&aBank Station":
+            execute console command "minecraft:tp %player% 292 31 -553"
+            execute console command "eco take %player% 5"
+            send "&aTrain &8| &fWelcome to &aBank Station"
+            
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is elytra named "&aAirport Station":
+            execute console command "minecraft:tp %player% 533 31 392"
+            execute console command "eco take %player% 5"
+            send "&aTrain &8| &fWelcome to &aAirport Station"
+            
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is dark oak log named "&aDark Oak Station":
+            execute console command "minecraft:tp %player% -122 31 -532"
+            execute console command "eco take %player% 5"
+            send "&aTrain &8| &fWelcome to &aDark Oak Station"
+            
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is sand named "&aBeach Shop Station":
+            execute console command "minecraft:tp %player% 533 31 -437"
+            execute console command "eco take %player% 5"
+            send "&aTrain &8| &fWelcome to &aBeach Shop Station"
+            
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is copper ingot named "&aIndustrial Station":
+            execute console command "minecraft:tp %player% 282 31 482"
+            execute console command "eco take %player% 5"
+            send "&aTrain &8| &fWelcome to &aIndustrial Station"
+            
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is diamond named "&aMansion Station":
+            execute console command "minecraft:tp %player% -2 31 -211"
+            execute console command "eco take %player% 5"
+            send "&aTrain &8| &fWelcome to &aMansion Station"
+
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is golden apple named "&aMedical Station":
+            execute console command "minecraft:tp %player% 533 31 52"
+            execute console command "eco take %player% 5"
+            send "&aTrain &8| &fWelcome to &aMedical Station"
+            
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is nether star named "&aSpawn Station":
+            execute console command "minecraft:tp %player% 292 31 -240"
+            execute console command "eco take %player% 5"
+            send "&aTrain &8| &fWelcome to &aSpawn Station"
+            
+
+

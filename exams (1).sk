@@ -1,0 +1,414 @@
+command /createexam <text>:
+    permission: exam.admin
+    trigger:
+        add arg-1 to {exams::*}
+        message "&3&lSuccessfully created the %arg-1% exam."
+command /editexam <text>:
+    permission: exam.admin
+    trigger:
+        if {exams::*} contains arg-1:
+            examgui(player, arg-1)
+        else:
+            message "&cThis Exam does not exist"
+
+
+command /exams:
+    permission: exam.admin
+    trigger:
+        message "&3&lAll exams: %{exams::*}%"
+
+command /deleteexam <text>:
+    permission: exam.admin
+    trigger:
+        if {exams::*} contains arg-1:
+            remove arg-1 from {exams::*}
+            delete {exams::%arg-1%::*}
+            message "&3&lSuccessfully deleted the %arg-1% exam."
+        else:
+            message "&cThis Exam does not exist"
+
+command /exam <text>:
+    trigger:
+        if {exams::*} contains arg-1:
+            if {exam::%player%::active} is true:
+                message "&cYou are currently working on an Exam! Finish it before making another"
+                stop
+            message "&3&lStarting Exam %arg-1%..."
+            wait 5 ticks
+            message "&3&lFirst Question: &b&l%{exams::%arg-1%::q1::quest}%"
+            wait 1 tick
+            message "&3&lOption A: &b&l%{exams::%arg-1%::q1::options::a}%"
+            wait 1 tick
+            message "&3&lOption B: &b&l%{exams::%arg-1%::q1::options::b}%"
+            wait 1 tick
+            message "&3&lOption C: &b&l%{exams::%arg-1%::q1::options::c}%"
+            wait 1 tick
+            message "&3&lOption D: &b&l%{exams::%arg-1%::q1::options::d}%"
+            set {exam::%player%::active} to true
+            set {exam::%player%::question} to 1
+            set {exam::%player%::exam} to arg-1
+            set {exam::%player%::points} to 0
+        else:
+            message "&cThis Exam does not exist"
+
+every tick:
+    loop all players:
+        if {exam::%loop-player%::cooldown} > 0:
+            remove 1 from {exam::%loop-player%::cooldown}
+on chat:
+    if {exam::%player%::active} is true:
+        cancel event
+        if {exam::%player%::cooldown} > 0:
+            message "&cNot so fast!"
+            stop
+        set {exam::%player%::cooldown} to 40
+        if {exam::%player%::question} is 1:
+            set {_cq} to {exam::%player%::question}
+            set {_ce} to {exam::%player%::exam}
+            add 1 to {exam::%player%::question}
+            if message is "A" or "B" or "C" or "D":
+                if {exams::%{_ce}%::q%{_cq}%::rightanswer} is message:
+                    message "&aCorrect answer"
+                    add 1 to {exam::%player%::points}
+                else:
+                    message "&aWrong answer. The Solution is %{exams::%{_ce}%::q%{_cq}%::rightanswer}%"
+                wait 1 second
+                message "&3&lSecond Question: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::quest}%"
+                wait 1 tick
+                message "&3&lOption A: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::a}%"
+                wait 1 tick
+                message "&3&lOption B: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::b}%"
+                wait 1 tick
+                message "&3&lOption C: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::c}%"
+                wait 1 tick
+                message "&3&lOption D: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::d}%"
+                stop
+        if {exam::%player%::question} is 2:
+            set {_cq} to {exam::%player%::question}
+            set {_ce} to {exam::%player%::exam}
+            add 1 to {exam::%player%::question}
+            if message is "A" or "B" or "C" or "D":
+                if {exams::%{_ce}%::q%{_cq}%::rightanswer} is message:
+                    message "&aCorrect answer"
+                    add 1 to {exam::%player%::points}
+                else:
+                    message "&aWrong answer. The Solution is %{exams::%{_ce}%::q%{_cq}%::rightanswer}%"
+                wait 1 second
+                message "&3&lThird Question: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::quest}%"
+                wait 1 tick
+                message "&3&lOption A: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::a}%"
+                wait 1 tick
+                message "&3&lOption B: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::b}%"
+                wait 1 tick
+                message "&3&lOption C: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::c}%"
+                wait 1 tick
+                message "&3&lOption D: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::d}%"
+                stop
+        if {exam::%player%::question} is 3:
+            set {_cq} to {exam::%player%::question}
+            set {_ce} to {exam::%player%::exam}
+            add 1 to {exam::%player%::question}
+            if message is "A" or "B" or "C" or "D":
+                if {exams::%{_ce}%::q%{_cq}%::rightanswer} is message:
+                    message "&aCorrect answer"
+                    add 1 to {exam::%player%::points}
+                else:
+                    message "&aWrong answer. The Solution is %{exams::%{_ce}%::q%{_cq}%::rightanswer}%"
+                wait 1 second
+                message "&3&lFourth Question: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::quest}%"
+                wait 1 tick
+                message "&3&lOption A: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::a}%"
+                wait 1 tick
+                message "&3&lOption B: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::b}%"
+                wait 1 tick
+                message "&3&lOption C: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::c}%"
+                wait 1 tick
+                message "&3&lOption D: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::d}%"
+                stop
+        if {exam::%player%::question} is 4:
+            set {_cq} to {exam::%player%::question}
+            set {_ce} to {exam::%player%::exam}
+            add 1 to {exam::%player%::question}
+            if message is "A" or "B" or "C" or "D":
+                if {exams::%{_ce}%::q%{_cq}%::rightanswer} is message:
+                    message "&aCorrect answer"
+                    add 1 to {exam::%player%::points}
+                else:
+                    message "&aWrong answer. The Solution is %{exams::%{_ce}%::q%{_cq}%::rightanswer}%"
+                wait 1 second
+                message "&3&lFifth Question: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::quest}%"
+                wait 1 tick
+                message "&3&lOption A: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::a}%"
+                wait 1 tick
+                message "&3&lOption B: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::b}%"
+                wait 1 tick
+                message "&3&lOption C: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::c}%"
+                wait 1 tick
+                message "&3&lOption D: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::d}%"
+                stop
+        if {exam::%player%::question} is 5:
+            set {_cq} to {exam::%player%::question}
+            set {_ce} to {exam::%player%::exam}
+            add 1 to {exam::%player%::question}
+            if message is "A" or "B" or "C" or "D":
+                if {exams::%{_ce}%::q%{_cq}%::rightanswer} is message:
+                    message "&aCorrect answer"
+                    add 1 to {exam::%player%::points}
+                else:
+                    message "&aWrong answer. The Solution is %{exams::%{_ce}%::q%{_cq}%::rightanswer}%"
+                wait 1 second
+                message "&3&lSixth Question: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::quest}%"
+                wait 1 tick
+                message "&3&lOption A: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::a}%"
+                wait 1 tick
+                message "&3&lOption B: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::b}%"
+                wait 1 tick
+                message "&3&lOption C: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::c}%"
+                wait 1 tick
+                message "&3&lOption D: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::d}%"
+                stop
+        if {exam::%player%::question} is 6:
+            set {_cq} to {exam::%player%::question}
+            set {_ce} to {exam::%player%::exam}
+            add 1 to {exam::%player%::question}
+            if message is "A" or "B" or "C" or "D":
+                if {exams::%{_ce}%::q%{_cq}%::rightanswer} is message:
+                    message "&aCorrect answer"
+                    add 1 to {exam::%player%::points}
+                else:
+                    message "&aWrong answer. The Solution is %{exams::%{_ce}%::q%{_cq}%::rightanswer}%"
+                wait 1 second
+                message "&3&lSeventh Question: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::quest}%"
+                wait 1 tick
+                message "&3&lOption A: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::a}%"
+                wait 1 tick
+                message "&3&lOption B: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::b}%"
+                wait 1 tick
+                message "&3&lOption C: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::c}%"
+                wait 1 tick
+                message "&3&lOption D: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::d}%"
+                stop
+        if {exam::%player%::question} is 7:
+            set {_cq} to {exam::%player%::question}
+            set {_ce} to {exam::%player%::exam}
+            add 1 to {exam::%player%::question}
+            if message is "A" or "B" or "C" or "D":
+                if {exams::%{_ce}%::q%{_cq}%::rightanswer} is message:
+                    message "&aCorrect answer"
+                    add 1 to {exam::%player%::points}
+                else:
+                    message "&aWrong answer. The Solution is %{exams::%{_ce}%::q%{_cq}%::rightanswer}%"
+                wait 1 second
+                message "&3&lEighth Question: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::quest}%"
+                wait 1 tick
+                message "&3&lOption A: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::a}%"
+                wait 1 tick
+                message "&3&lOption B: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::b}%"
+                wait 1 tick
+                message "&3&lOption C: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::c}%"
+                wait 1 tick
+                message "&3&lOption D: &b&l%{exams::%{_ce}%::q%{_cq} + 1%::options::d}%"
+                stop
+        if {exam::%player%::question} is 8:
+            set {_cq} to {exam::%player%::question}
+            set {_ce} to {exam::%player%::exam}
+            add 1 to {exam::%player%::question}
+            if message is "A" or "B" or "C" or "D":
+                if {exams::%{_ce}%::q%{_cq}%::rightanswer} is message:
+                    message "&aCorrect answer"
+                    add 1 to {exam::%player%::points}
+                else:
+                    message "&aWrong answer. The Solution is %{exams::%{_ce}%::q%{_cq}%::rightanswer}%"
+                wait 1 second
+                message "&3&lEvaluating results..."
+                wait 10 ticks
+                set {_points} to ({exam::%player%::points} / 8) * 100
+                if {_points} < {exam::%{_ce}%::rankpercent}:
+                    message "&c&lExam Failed. %{_points}%%%/{exams::%{_ce}%::rankpercent}%%"
+                else:
+                    message "&a&lExam Passed. %{_points}%%%/%{exams::%{_ce}%::rankpercent}%%%"
+                    execute console command "lp %player% parent set %{exams::%{_ce}%::rank}%"
+                set {exam::%player%::active} to false
+                delete {exam::%player%::question}
+                delete {exam::%player%::exam}
+                set {exam::%player%::points} to 0
+on chat:
+    loop all players:
+        if player can see loop-player:
+            if message contains "%loop-player%":
+                if {exam::%player%::active} is true:
+                    send "&c&oThat player is currently working on an Exam..." to player
+                    send "&c&oIgnore %player% and focus on your exam!" to loop-player
+
+on inventory click:
+    if name of event-inventory contains "&3&lExam Editor:":
+        cancel event
+        if index of event-slot is 4:
+            message "&3&lPlease enter the Percentage required to get the rank."
+            set {exams::a::%player%::rankpercent} to true
+            set {_currexam::*} to uncolored name of event-inventory split at "Exam Editor: "
+            remove all "" from {_currexam::*}
+            set {exams::a::%player%::ce} to join {_currexam::*} with ""
+            close player's inventory
+        if index of event-slot is 22:
+            message "&3&lPlease enter the Rank to get."
+            set {exams::a::%player%::rank} to true
+            set {_currexam::*} to uncolored name of event-inventory split at "Exam Editor: "
+            remove all "" from {_currexam::*}
+            set {exams::a::%player%::ce} to join {_currexam::*} with ""
+            close player's inventory
+        if index of event-slot is 0:
+            message "&3&lPlease enter the Question in chat."
+            set {exams::a::%player%::quest} to true
+            set {exams::a::%player%::cq} to 1
+            set {_currexam::*} to uncolored name of event-inventory split at "Exam Editor: "
+            remove all "" from {_currexam::*}
+            set {exams::a::%player%::ce} to join {_currexam::*} with ""
+            close player's inventory
+        if index of event-slot is 2:
+            message "&3&lPlease enter the Question in chat."
+            set {exams::a::%player%::quest} to true
+            set {exams::a::%player%::cq} to 2
+            set {_currexam::*} to uncolored name of event-inventory split at "Exam Editor: "
+            remove all "" from {_currexam::*}
+            set {exams::a::%player%::ce} to join {_currexam::*} with ""
+            close player's inventory
+        if index of event-slot is 6:
+            message "&3&lPlease enter the Question in chat."
+            set {exams::a::%player%::quest} to true
+            set {exams::a::%player%::cq} to 3
+            set {_currexam::*} to uncolored name of event-inventory split at "Exam Editor: "
+            remove all "" from {_currexam::*}
+            set {exams::a::%player%::ce} to join {_currexam::*} with ""
+            close player's inventory
+        if index of event-slot is 8:
+            message "&3&lPlease enter the Question in chat."
+            set {exams::a::%player%::quest} to true
+            set {exams::a::%player%::cq} to 4
+            set {_currexam::*} to uncolored name of event-inventory split at "Exam Editor: "
+            remove all "" from {_currexam::*}
+            set {exams::a::%player%::ce} to join {_currexam::*} with ""
+            close player's inventory
+        if index of event-slot is 18:
+            message "&3&lPlease enter the Question in chat."
+            set {exams::a::%player%::quest} to true
+            set {exams::a::%player%::cq} to 5
+            set {_currexam::*} to uncolored name of event-inventory split at "Exam Editor: "
+            remove all "" from {_currexam::*}
+            set {exams::a::%player%::ce} to join {_currexam::*} with ""
+            close player's inventory
+        if index of event-slot is 20:
+            message "&3&lPlease enter the Question in chat."
+            set {exams::a::%player%::quest} to true
+            set {exams::a::%player%::cq} to 6
+            set {_currexam::*} to uncolored name of event-inventory split at "Exam Editor: "
+            remove all "" from {_currexam::*}
+            set {exams::a::%player%::ce} to join {_currexam::*} with ""
+            close player's inventory
+        if index of event-slot is 24:
+            message "&3&lPlease enter the Question in chat."
+            set {exams::a::%player%::quest} to true
+            set {exams::a::%player%::cq} to 7
+            set {_currexam::*} to uncolored name of event-inventory split at "Exam Editor: "
+            remove all "" from {_currexam::*}
+            set {exams::a::%player%::ce} to join {_currexam::*} with ""
+            close player's inventory
+        if index of event-slot is 26:
+            message "&3&lPlease enter the Question in chat."
+            set {exams::a::%player%::quest} to true
+            set {exams::a::%player%::cq} to 8
+            set {_currexam::*} to uncolored name of event-inventory split at "Exam Editor: "
+            remove all "" from {_currexam::*}
+            set {exams::a::%player%::ce} to join {_currexam::*} with ""
+            close player's inventory
+
+on chat:
+    if {exams::a::%player%::quest} is true:
+        cancel event
+        set {_cq} to {exams::a::%player%::cq} 
+        set {_ce} to {exams::a::%player%::ce} 
+        message "&3&lEnter the first answer."
+        set {exams::%{_ce}%::q%{_cq}%::quest} to message
+        delete {exams::a::%player%::quest} 
+        set {exams::a::%player%::a} to true
+        
+    else if {exams::a::%player%::a} is true:
+        cancel event
+        set {_cq} to {exams::a::%player%::cq} 
+        set {_ce} to {exams::a::%player%::ce} 
+        message "&3&lEnter the second answer."
+        set {exams::%{_ce}%::q%{_cq}%::options::a} to message
+        delete {exams::a::%player%::a} 
+        set {exams::a::%player%::b} to true
+        
+    else if {exams::a::%player%::b} is true:
+        cancel event
+        set {_cq} to {exams::a::%player%::cq} 
+        set {_ce} to {exams::a::%player%::ce} 
+        message "&3&lEnter the third answer."
+        set {exams::%{_ce}%::q%{_cq}%::options::b} to message
+        delete {exams::a::%player%::b} 
+        set {exams::a::%player%::c} to true
+        
+    else if {exams::a::%player%::c} is true:
+        cancel event
+        set {_cq} to {exams::a::%player%::cq} 
+        set {_ce} to {exams::a::%player%::ce} 
+        message "&3&lEnter the fourth answer."
+        set {exams::%{_ce}%::q%{_cq}%::options::c} to message
+        delete {exams::a::%player%::c} 
+        set {exams::a::%player%::d} to true
+        
+    else if {exams::a::%player%::d} is true:
+        cancel event
+        set {_cq} to {exams::a::%player%::cq} 
+        set {_ce} to {exams::a::%player%::ce} 
+        message "&3&lEnter the right answer(A, B, C or D)."
+        set {exams::%{_ce}%::q%{_cq}%::options::d} to message
+        delete {exams::a::%player%::d}
+        set {exams::a::%player%::r} to true
+        
+    else if {exams::a::%player%::r} is true:
+        cancel event
+        if message is not "A" or "B" or "C" or "D":
+            message "&cPlease enter a valid answer (A, B, C or D)."
+            stop
+        set {_cq} to {exams::a::%player%::cq} 
+        set {_ce} to {exams::a::%player%::ce}
+        set {exams::%{_ce}%::q%{_cq}%::rightanswer} to message
+        message "&3&lThe right answer now is %{exams::%{_ce}%::q%{_cq}%::rightanswer}%."
+        delete {exams::a::%player%::r}
+        set {exams::a::%player%::quest} to false
+    if {exams::a::%player%::rank} is true:
+        cancel event
+        set {_ce} to {exams::a::%player%::ce}
+        message "&3&lThe Rank to get for exam %{_ce}% is now %message%"
+        set {exams::%{_ce}%::rank} to message
+        delete {exams::a::%player%::ce}
+        set {exams::a::%player%::rank} to false
+    if {exams::a::%player%::rankpercent} is true:
+        cancel event
+        set {_msg} to message parsed as number
+        set {_ce} to {exams::a::%player%::ce}
+        set {exams::%{_ce}%::rankpercent} to {_msg}
+        message "&3&lThe Percentage required to ge the rank at exam %{_ce}% is not %{_msg}%%%"
+        delete {exams::a::%player%::ce}
+        set {exams::a::%player%::rankpercent} to false
+    
+
+function examgui(p: player, n: text):
+    set {_egui} to a new chest inventory with 3 rows named "&3&lExam Editor: %{_n}%"
+    set slot 13 of {_egui} to book with lore "&3&l%{_n}%" named "&3&lExam:"
+    set slot 0 of {_egui} to paper with lore "&3Question: %{exams::%{_n}%::q1::quest}%" and "&3A: %{exams::%{_n}%::q1::options::a}%" and "&3B: %{exams::%{_n}%::q1::options::b}%" and "&3C: %{exams::%{_n}%::q1::options::c}%" and "&3D: %{exams::%{_n}%::q1::options::d}%" and "&3Right Answer: %{exams::%{_n}%::q1::rightanswer}%" named "&3Question 1"
+    set slot 2 of {_egui} to paper with lore "&3Question: %{exams::%{_n}%::q2::quest}%" and "&3A: %{exams::%{_n}%::q2::options::a}%" and "&3B: %{exams::%{_n}%::q2::options::b}%" and "&3C: %{exams::%{_n}%::q2::options::c}%" and "&3D: %{exams::%{_n}%::q2::options::d}%" and "&3Right Answer: %{exams::%{_n}%::q2::rightanswer}%" named "&3Question 2"
+    set slot 6 of {_egui} to paper with lore "&3Question: %{exams::%{_n}%::q3::quest}%" and "&3A: %{exams::%{_n}%::q3::options::a}%" and "&3B: %{exams::%{_n}%::q3::options::b}%" and "&3C: %{exams::%{_n}%::q3::options::c}%" and "&3D: %{exams::%{_n}%::q3::options::d}%" and "&3Right Answer: %{exams::%{_n}%::q3::rightanswer}%" named "&3Question 3"
+    set slot 8 of {_egui} to paper with lore "&3Question: %{exams::%{_n}%::q4::quest}%" and "&3A: %{exams::%{_n}%::q4::options::a}%" and "&3B: %{exams::%{_n}%::q4::options::b}%" and "&3C: %{exams::%{_n}%::q4::options::c}%" and "&3D: %{exams::%{_n}%::q4::options::d}%" and "&3Right Answer: %{exams::%{_n}%::q4::rightanswer}%" named "&3Question 4"
+    set slot 18 of {_egui} to paper with lore "&3Question: %{exams::%{_n}%::q5::quest}%" and "&3A: %{exams::%{_n}%::q5::options::a}%" and "&3B: %{exams::%{_n}%::q5::options::b}%" and "&3C: %{exams::%{_n}%::q5::options::c}%" and "&3D: %{exams::%{_n}%::q5::options::d}%" and "&3Right Answer: %{exams::%{_n}%::q5::rightanswer}%" named "&3Question 5"
+    set slot 20 of {_egui} to paper with lore "&3Question: %{exams::%{_n}%::q6::quest}%" and "&3A: %{exams::%{_n}%::q6::options::a}%" and "&3B: %{exams::%{_n}%::q6::options::b}%" and "&3C: %{exams::%{_n}%::q6::options::c}%" and "&3D: %{exams::%{_n}%::q6::options::d}%" and "&3Right Answer: %{exams::%{_n}%::q6::rightanswer}%" named "&3Question 6"
+    set slot 24 of {_egui} to paper with lore "&3Question: %{exams::%{_n}%::q7::quest}%" and "&3A: %{exams::%{_n}%::q7::options::a}%" and "&3B: %{exams::%{_n}%::q7::options::b}%" and "&3C: %{exams::%{_n}%::q7::options::c}%" and "&3D: %{exams::%{_n}%::q7::options::d}%" and "&3Right Answer: %{exams::%{_n}%::q7::rightanswer}%" named "&3Question 7"
+    set slot 26 of {_egui} to paper with lore "&3Question: %{exams::%{_n}%::q8::quest}%" and "&3A: %{exams::%{_n}%::q8::options::a}%" and "&3B: %{exams::%{_n}%::q8::options::b}%" and "&3C: %{exams::%{_n}%::q8::options::c}%" and "&3D: %{exams::%{_n}%::q8::options::d}%" and "&3Right Answer: %{exams::%{_n}%::q8::rightanswer}%" named "&3Question 8"
+    
+    set slot 4 of {_egui} to xp bottle with lore "&3Currently: %{exams::%{_n}%::rankpercent} ? 100%%%" named "&3Rank Percent"
+    set slot 22 of {_egui} to anvil with lore "&3Rank: %{exams::%{_n}%::rank}%" named "&3Rank"
+
+    open {_egui} to {_p}

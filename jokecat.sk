@@ -1,0 +1,4 @@
+on right click on entity:
+    if name of clicked entity is "&aCat Fly":
+        cancel event
+        make player ride clicked entity

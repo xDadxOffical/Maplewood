@@ -1,0 +1,8 @@
+command /nbt [<text>] [<text>]:
+  permission: admin
+  trigger:
+    if arg-2 is set:
+      set player's tool to player's tool with nbt compound from arg-2
+      message "Added %arg-2% to nbt of your tool"
+    else:
+      message "%pretty nbt of nbt compound from player's tool%" to player

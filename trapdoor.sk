@@ -1,0 +1,4 @@
+on right click on iron trapdoor:
+    toggle event-block
+    wait 3 seconds
+    toggle event-block

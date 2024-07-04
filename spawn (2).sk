@@ -1,0 +1,16 @@
+command /spawn:
+    trigger:
+        teleport player to {spawnloc}
+        
+command /setspawn:
+    permission: set.spawn
+    trigger:
+        set {spawnloc} to player's location
+        send "&aSet spawn to your current location" to player
+        
+on first join:
+    teleport player to {spawnloc}
+    
+on respawn:
+    teleport player to {spawnloc}
+    send "&4&lDEATH &8- &cYou wake up in the hospital.. I must have almost died"

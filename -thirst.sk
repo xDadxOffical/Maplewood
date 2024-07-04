@@ -1,0 +1,42 @@
+command /setthirst <number>:
+    permission: op
+    permission message: "&b&lThirst >> &bYou may not use this command.
+    trigger:
+        set {%player%.thirst} to arg-1
+    
+command /thirst:
+    trigger:
+        send "&fYour thirst is &a%{%player%.thirst}%"
+        
+        
+on first join:
+    set {%player%.thirst} to 10
+    
+every 1 second:
+    loop all players:
+        if {%loop-player%.thirst} < 6:
+            apply nausea 5 without any particles to loop-player for 1 second
+            apply slowness 2 without any particles to loop-player for 1 second
+
+every 1 second:
+    loop all players:
+        if {%loop-player%.thirst} = 0:
+            kill loop-player
+            set {%loop-player%.thirst} to 10
+            
+
+on consume:
+    if player's tool is water bottle:
+        if {%player%.thirst} < 10:
+            add 0.5 to {%player%.thirst}
+        else:
+            stop
+            
+every 5 minutes:
+    loop all players:
+        remove 0.5 from {%loop-player%.thirst}
+        
+every 5 minutes:
+    loop all players:
+        if loop-player is "xDadx":
+            add 0.5 to {%loop-player%.thirst}

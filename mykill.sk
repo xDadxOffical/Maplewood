@@ -1,0 +1,10 @@
+command /kill <text>:
+    trigger:
+        if arg-1 is a player:
+            kill player with name {_name}
+        else:
+            send "Player not found."
+
+on tab complete of "/kill":
+    set {_playerNames} to display names of online players
+    set tab completions for position 1 to {_playerNames}

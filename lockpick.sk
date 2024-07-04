@@ -1,0 +1,29 @@
+on right click:
+    if player is holding iron hoe named "&7Lock Pick":
+        if event-block is sign:
+            if first line of event-block contains "[Private]":
+                if {lockpick::%player%} = 7:
+                    set event-block to air
+                    send "&aSucessfully &eremoved the &clock &esign"
+                    set {lockpick::%player%} to random integer between 1 and 10
+                    #set {_item} to player's tool
+                    #add 15 durability to {_item}
+                else:
+                    send "&cFailed"
+                    set {lockpick::%player%} to random integer between 1 and 10
+                
+                
+                
+command /selectrandomnumberlockpick <offlineplayer>:
+    permission: admin
+    trigger:
+        set {lockpick::%player%} to random integer between 1 and 10
+    
+    
+command /checklockpicknumber:
+    trigger:
+        send "%{lockpick::%player%}%"
+        
+        
+on join:
+    set {lockpick::%player%} to random integer between 0 and 10

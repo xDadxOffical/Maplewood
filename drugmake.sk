@@ -1,0 +1,20 @@
+command /getdrugbreaker:
+    trigger:
+        give player iron hoe named "&5Drug Breaker"
+
+on break of large fern:
+    cancel drops
+    give player 1 wheat seed named "&2Marijuana Seed"
+    
+on place of fern:
+    wait 3 minutes
+    set block to large fern
+    
+command /marijuanaplant:
+    permission: drugs.getplant
+    trigger:
+        give player 1 fern named "&2Marijuana Plant"
+        
+command /marijuanaseed:
+    trigger:
+        give player 1 wheat seed named "&2Marijuana Seed"

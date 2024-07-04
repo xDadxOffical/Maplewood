@@ -1,0 +1,147 @@
+command refill:
+	permission: op
+	trigger:
+		set {maxammo::%player%::m9} to 128
+		set {maxammo::%player%::rifle} to 240
+
+
+
+function LineX(l: location, l2: location, t1: color, t2: num, p: particle):
+	set {_v} to vector from {_l} to {_l2}
+	set {_z} to 11 - {_t2}
+	loop (distance between {_l} and {_l2} * {_z}) times:
+		set vector length of {_v} to (loop-value / {_z})
+		if {_p} is dust:
+			draw 1 of dust using dustOption({_t1}, 2) at {_l} ~ {_v} with extra 1
+		else:
+			draw 1 of {_p} at {_l} ~ {_v} with extra 0
+
+on right click:
+	
+	if name of player's tool is "&aPistol":
+		set the player's level to {maxammo::%player%::m9}
+		set {_waited} to difference between {lastused::%player%::m9} and now
+		if {_waited} is less than 0.5 seconds:
+			stop
+			
+		else:
+			if {ammo::%player%::m9} > 0:
+				if {reloading::%player's uuid%} isn't set:
+					remove 1 from {ammo::%player%::m9}
+					set {_l} to location 15 meters infront of player
+					set {_l} to location 1.75 meters above {_l}
+					set {_l1} to location 1.75 meters above player
+					LineX({_l1}, {_l}, light blue, 2, crit) 
+					loop 15 times:
+						add 1 to {_e}
+						set {_c} to location {_e} meters infront of player
+						loop all entities in radius 1 around {_c}:
+							if loop-entity is a player:
+								if {_damaged::*} contains loop-entity:
+									set {_r} to 1
+								else:
+									add loop-entity to {_damaged::*}
+									damage loop-entity by 3
+					set {lastused::%player%::m9} to now
+					send action bar "&c᠆᠆᠆᠆᠆᠆᠆᠆᠆ &8| &a%{ammo::%player%::m9}%&7/&e8" to player
+					wait 2 tick
+					send action bar "&c᠆᠆᠆᠆᠆᠆᠆᠆&7᠆᠆ &8| &a%{ammo::%player%::m9}%&7/&e8" to player
+					wait 2 tick
+					send action bar "&c᠆᠆᠆᠆᠆᠆&7᠆᠆᠆᠆ &8| &a%{ammo::%player%::m9}%&7/&e8" to player
+					wait 2 tick
+					send action bar "&c᠆᠆᠆᠆&7᠆᠆᠆᠆᠆᠆ &8| &a%{ammo::%player%::m9}%&7/&e8" to player
+					wait 2 tick
+					send action bar "&c᠆᠆&7᠆᠆᠆᠆᠆᠆᠆᠆ &8| &a%{ammo::%player%::m9}%&7/&e8" to player
+					wait 2 tick
+					send action bar "&7᠆᠆᠆᠆᠆᠆᠆᠆᠆᠆ &8| &a%{ammo::%player%::m9}%&7/&e8" to player
+					stop
+			else:
+				send "&cYou need to reload! (left click)"
+	if name of player's tool is "&aRifle":
+		set the player's level to {maxammo::%player%::rifle}
+		set {_waited} to difference between {lastused::%player%::rifle} and now
+		if {_waited} is less than 0.2 seconds:
+			stop
+			
+		else:
+			if {ammo::%player%::rifle} > 0:
+				if {reloading::%player's uuid%} isn't set:
+					remove 1 from {ammo::%player%::rifle}
+					set {_l} to location 16 meters infront of player
+					set {_l} to location 1.75 meters above {_l}
+					set {_l1} to location 1.75 meters above player
+					LineX({_l1}, {_l}, white, 1, smoke) 
+					loop 16 times:
+						add 1 to {_e}
+						set {_c} to location {_e} meters infront of player
+						loop all entities in radius 1 around {_c}:
+							if loop-entity is a player:
+								if {_damaged::*} contains loop-entity:
+									set {_r} to 1
+								else:
+									add loop-entity to {_damaged::*}
+									damage loop-entity by 2.5
+					set {lastused::%player%::rifle} to now
+					send action bar "&c᠆᠆᠆᠆᠆᠆᠆᠆᠆᠆ &8| &a%{ammo::%player%::rifle}%&7/&e20" to player
+					wait 1 tick
+					send action bar "&c᠆᠆᠆᠆᠆᠆᠆᠆&7᠆᠆ &8| &a%{ammo::%player%::rifle}%&7/&e20" to player
+					wait 1 tick
+					send action bar "&c᠆᠆᠆᠆᠆᠆&7᠆᠆᠆᠆ &8| &a%{ammo::%player%::rifle}%&7/&e20" to player
+					send action bar "&c᠆᠆᠆᠆&7᠆᠆᠆᠆᠆᠆ &8| &a%{ammo::%player%::rifle}%&7/&e20" to player
+					wait 1 tick
+					send action bar "&c᠆᠆&7᠆᠆᠆᠆᠆᠆᠆᠆ &8| &a%{ammo::%player%::rifle}%&7/&e20" to player
+					wait 1 tick
+					send action bar "&7᠆᠆᠆᠆᠆᠆᠆᠆᠆᠆ &8| &a%{ammo::%player%::rifle}%&7/&e20" to player
+					stop
+			else:
+				send "&cYou need to reload! (left click)"
+
+on left click:
+	if name of player's tool is "&aPistol":
+		if {ammo::%player%::m9} isn't set:
+			set {ammo::%player%::m9} to 0
+		set {_amount} to amount of iron nugget named "&aSmall Bullet" in player's inventory	
+		if {maxammo::%player%::m9} >= 8-{ammo::%player%::m9}:
+			if {reloading::%player's uuid%} isn't set:
+				set {reloading::%player's uuid%} to true
+				remove 8-{ammo::%player%::m9} from {maxammo::%player%::m9}
+				set the player's level to {maxammo::%player%::m9}
+				send action bar "&eReloading &8[&e▊&7▊▊▊▊&8]" to player
+				wait 10 ticks
+				send action bar "&eReloading &8[&e▊▊&7▊▊▊&8]" to player
+				wait 10 tick
+				send action bar "&eReloading &8[&e▊▊▊&7▊▊&8]" to player
+				wait 10 tick
+				send action bar "&eReloading &8[&e▊▊▊▊&7▊&8]" to player
+				wait 10 tick
+				send action bar "&eReloading &8[&e▊▊▊▊▊&7&8]" to player
+				wait 10 tick
+				send action bar "" to player
+				clear {reloading::%player's uuid%}
+				set {ammo::%player%::m9} to 8
+		else:
+			send "&cNot enough bullets to reload"
+	if name of player's tool is "&aRifle":
+		if {ammo::%player%::rifle} isn't set:
+			set {ammo::%player%::rifle} to 0
+		set {_amount} to amount of iron nugget named "&aSmall Bullet" in player's inventory	
+		if {maxammo::%player%::rifle} >= 20-{ammo::%player%::rifle}:
+			if {reloading::%player's uuid%} isn't set:
+				set {reloading::%player's uuid%} to true
+				remove 20-{ammo::%player%::rifle} from {maxammo::%player%::rifle}
+				set the player's level to {maxammo::%player%::rifle}
+				send action bar "&eReloading &8[&e▊&7▊▊▊▊&8]" to player
+				wait 15 ticks
+				send action bar "&eReloading &8[&e▊▊&7▊▊▊&8]" to player
+				wait 15 tick
+				send action bar "&eReloading &8[&e▊▊▊&7▊▊&8]" to player
+				wait 15 tick
+				send action bar "&eReloading &8[&e▊▊▊▊&7▊&8]" to player
+				wait 15 tick
+				send action bar "&eReloading &8[&e▊▊▊▊▊&7&8]" to player
+				wait 10 tick
+				send action bar "" to player
+				clear {reloading::%player's uuid%}
+				set {ammo::%player%::rifle} to 20
+		else:
+			send "&cNot enough bullets to reload"

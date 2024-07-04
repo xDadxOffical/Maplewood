@@ -1,0 +1,80 @@
+command /furnituremenu:
+  permission: epoxy.furniture
+  trigger:
+    set metadata tag "furnituregui" of player to chest inventory with 6 row named "Furniture"
+    loop 56 times:
+      set slot (loop-number - 1) of metadata tag "furnituregui" of player to 64 of {furnituregui::%loop-number%}
+    open metadata tag "furnituregui" of player to player
+
+command /furniturebuilder <text> [<text>] [<text>]:
+  permission: epoxy.furniture
+  trigger:
+    if arg-1 is "type":
+      if arg-2 is "chair":
+        set tag "furniture;type" of nbt compound of player's tool to "chair"
+      else if arg-2 is "table":
+        set tag "furniture;type" of nbt compound of player's tool to "table"
+      else if arg-2 is "misc":
+        set tag "furniture;type" of nbt compound of player's tool to "misc"
+      else:
+        message "&7[&bEPRB&7] &fFurniture type is &6%tag "furniture;type" of nbt compound of player's tool%"
+        stop
+      message "&7[&bEPRB&7] &fFurniture type set to &6%arg-2%"
+
+    else if arg-1 is "sit":
+      if arg-2 is "true":
+        set tag "furniture;sit" of nbt compound of player's tool to "true"
+      else if arg-2 is "false":
+        set tag "furniture;sit" of nbt compound of player's tool to "false"
+      message "&7[&bEPRB&7] &fSit set to &6%arg-2%"
+
+    else if arg-1 is "subtype":
+      if arg-2 is "null":
+        set tag "furniture;subtype" of nbt compound of player's tool to ""
+      else:
+        set tag "furniture;subtype;%arg-2%" of nbt compound of player's tool to arg-3
+
+
+
+
+on tab complete of "/furniturebuilder":
+  set tab completions for position 1 to "type", "sit" and "subtype"
+  if tab arg-1 = "type":
+    set tab completions for position 2 to "chair", "table" and "misc"
+  else if tab arg-1 = "sit":
+    set tab completions for position 2 to "true" and "false"
+  else if tab arg-1 = "subtype":
+    set tab completions for position 2 to "null"
+
+on place:
+  set {_nbt} to nbt compound of player's tool
+  set {_type} to tag "furniture;type" of nbt compound of player's tool
+
+command /customsit:
+  permission: admin
+  trigger:
+    customSit(player's location, player, 0)
+
+function customSit(spawnloc: location, player: player, offset: number):
+  set y-coordinate of {_spawnloc} to (y-coordinate of {_spawnloc}-0.9) + {_offset}
+  set {_n} to nbt compound from "{NoAI:1,NoGravity:1,Invulnerable:1,Silent:1}"
+  spawn 1 pig at {_spawnloc} with nbt {_n}
+  set name of last spawned pig to "&eSeat"
+  set {_pig} to last spawned pig
+  set health of {_pig} to 1
+  apply potion of invisibility without any particles to {_pig} for 9 days
+  make {_player} ride {_pig}
+
+on death:
+    name of victim is "&eSeat"
+    clear drops
+
+on vehicle exit:
+  name of vehicle of player is "&eSeat":
+    delete vehicle of player
+    set {_w} to world of player
+    set {_loc} to location of player
+    set y-coordinate of {_loc} to y-coordinate of {_loc}+0.6
+    wait a tick
+    {_w} is player's world
+    teleport player to {_loc}

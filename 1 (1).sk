@@ -1,0 +1,266 @@
+on load:
+    set {femaleforeignfirstNames::*} to {femaleforeignfirstNames::*}
+    set {foreignlastNames::*} to {foreignlastNames::*}
+    set {maleforeignfirstNames::*} to {maleforeignfirstNames::*}
+    set {femalefirstNames::*} to {femalefirstNames::*}
+    set {malefirstNames::*} to {malefirstNames::*}
+    set {lastNames::*} to {lastNames::*}
+    
+    
+command /addfemaleforeign <text>:
+    trigger:
+        add arg-1 to {femaleforeignfirstNames::*}
+        send "&aAdded %arg-1% to Female Foreign First Names"
+    
+command /addmaleforeign <text>:
+    trigger:
+        add arg-1 to {maleforeignfirstNames::*}
+        send "&aAdded %arg-1% to Male Foreign First Names"
+        
+command /addforeignlast <text>:
+    trigger:
+        add arg-1 to {foreignlastNames::*}
+        send "&aAdded %arg-1% to %{foreignlastNames::*}%"
+        
+command /addlastname <text>:
+    trigger:
+        add arg-1 to {lastNames::*}
+        send "&Added %arg-1% to %{lastNames::*}%"
+
+command /addmalefirst <text>:
+    trigger:
+        add arg-1 to {malefirstNames::*}
+        send "&aAdded %arg-1% to %{malefirstNames::*}%"
+    
+    
+    
+    
+    
+command /customname <text> <text>:
+    permission: name.set.donator
+    trigger:
+        if length of arg-1 > 15:
+            send "&cYo max name limit is 15"
+            stop
+        else if length of arg-2 > 15:
+            send "&cYo max name limit is 15"
+            stop
+        else if length of arg-1 < 3:
+            send "&cYo min length is 3"
+            stop
+        else if length of arg-2 < 3:
+            send "&cYo min length is 3"
+            stop
+        else if arg-1 or arg-2 = "fuck", "shit", "bitch", "nigga", "nigger", "furry", "niga", "ngga", "uwu", "nuzzles", "pounces", "ass", "Tantalised", or "motherfucker":
+            send "&cNah bro you cant use &a%arg-1%&c in your name"
+            stop
+        else if arg-2 contains "fuck", "shit", "bitch", "nigga", "nigger", "furry", "niga", "ngga", "uwu", "nuzzles", "pounces", "ass", "Tantalised", or "motherfucker":
+            send "&cNah bro you cant use &a%arg-1%&c in your name"
+            stop
+        else:
+            set {firstName} to arg-1
+            set {lastName} to arg-2
+            set {newName::%player's uuid%} to "%{firstName}% %{lastName}%"
+            set display name of player to {newName::%player's uuid%}
+            send "&eYou have been assigned a new name: &f%{newName::%player's uuid%}%" to player
+        
+command /firstnameonly <text>:
+    permission: name.*
+    trigger:
+        set {firstName} to arg-1
+        set {lastName} to ""
+        set {newName::%player's uuid%} to "%{firstName}% %{lastName}%"
+        set display name of player to {newName::%player's uuid%}
+        send "&eYou have been assigned a new name: &f%{newName::%player's uuid%}%" to player
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+command /criminalexecute <player>:
+    trigger:
+        kill arg-1
+        set {criminal::%player's uuid%} to true
+        
+on respawn:
+    if {criminal::%player's uuid%} is true:
+        wait 1 tick
+        set {firstName} to random element out of {malefirstNames::*}
+        set {lastName} to random element out of {lastNames::*}
+        set {newName::%player's uuid%} to "%{firstName}% %{lastName}%"
+        set display name of player to {newName::%player's uuid%}
+        set metadata tag "vanillaGUI" of player to chest inventory with 3 rows named "&bMale &for &dFemale"
+        set slot 11 of metadata tag "vanillaGUI" of player to light blue stained glass pane named "&bMale"
+        set slot 15 of metadata tag "vanillaGUI" of player to pink stained glass pane named "&dFemale"
+        open (metadata tag "vanillaGUI" of player) to player
+        set {criminal::%player's uuid%} to false
+    else:
+        stop
+    
+    
+    
+    
+command /ondeath:
+    permission: randomname.skript
+    trigger:
+        set metadata tag "vanillaGUI" of player to chest inventory with 3 rows named "&eDeath Menu"
+        set slot 11 of metadata tag "vanillaGUI" of player to red stained glass pane named "&aNew Life"
+        set slot 15 of metadata tag "vanillaGUI" of player to yellow stained glass pane named "&dContinue Life"
+        open (metadata tag "vanillaGUI" of player) to player
+    
+
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is red stained glass pane named "&aNew Life":
+            set metadata tag "vanillaGUI" of player to chest inventory with 3 rows named "&eAre you &asure&e?"
+            set slot 11 of metadata tag "vanillaGUI" of player to lime stained glass pane named "&aYes"
+            set slot 15 of metadata tag "vanillaGUI" of player to red stained glass pane named "&cNo"
+            open (metadata tag "vanillaGUI" of player) to player
+            
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is red stained glass pane named "&cNo":
+            close player's inventory
+            send "&aNew Life &cABORTED" to player
+            send "&eYour name is still &f%{newName::%player's uuid%}%" to player
+            
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is lime stained glass pane named "&aYes":
+            set metadata tag "vanillaGUI" of player to chest inventory with 4 rows named "&bMale &for &dFemale"
+            set slot 35 of metadata tag "vanillaGUI" of player to gray stained glass pane with custom model data 1000
+            open (metadata tag "vanillaGUI" of player) to player
+
+    
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is yellow stained glass pane named "&dContinue Life":
+            close player's inventory
+            send "&eYour name is still &f%{newName::%player's uuid%}%" to player
+    
+    
+    
+    
+    
+on first join:
+    set {firstName} to random element out of {malefirstNames::*}
+    set {lastName} to random element out of {lastNames::*}
+    set {newName::%player's uuid%} to "%{firstName}% %{lastName}%"
+    set display name of player to {newName::%player's uuid%}
+    set metadata tag "vanillaGUI" of player to chest inventory with 3 rows named "&bMale &for &dFemale"
+    set slot 11 of metadata tag "vanillaGUI" of player to light blue stained glass pane named "&bMale"
+    set slot 15 of metadata tag "vanillaGUI" of player to pink stained glass pane named "&dFemale"
+    open (metadata tag "vanillaGUI" of player) to player
+
+    
+on join:
+    set display name of player to {newName::%player's uuid%}
+
+
+on respawn:
+    wait 1 tick
+    set metadata tag "vanillaGUI" of player to chest inventory with 3 rows named "&eDeath Menu"
+    set slot 11 of metadata tag "vanillaGUI" of player to red stained glass pane named "&aNew Life"
+    set slot 15 of metadata tag "vanillaGUI" of player to yellow stained glass pane named "&dContinue Life"
+    open (metadata tag "vanillaGUI" of player) to player
+    
+
+
+
+
+
+
+
+
+        
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        cancel event
+
+
+
+
+# Female GUI Foreign/Maplewoodian
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        (rows of metadata tag "vanillaGUI" of player) = 4
+        loop 4 times:
+            loop 4 times:
+                if index of event-slot = (((loop-number-2)-1)+(9) * ((loop-number-1)-1)):
+                    set metadata tag "vanillaGUI" of player to chest inventory with 3 rows named "&5Foreign &for &dMaplewood"
+                    set slot 11 of metadata tag "vanillaGUI" of player to oak log named "&5Foreign Female"
+                    set slot 15 of metadata tag "vanillaGUI" of player to stone named "&dMaplewood Female"
+                    open (metadata tag "vanillaGUI" of player) to player
+                    set {gender::%player's uuid%} to "f"
+
+
+
+#Foreign Female Set Name            
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is oak log named "&5Foreign Female":
+            set {firstName} to random element out of {femaleforeignfirstNames::*}
+            set {lastName} to random element out of {foreignlastNames::*}
+            set {newName::%player's uuid%} to "%{firstName}% %{lastName}%"
+            set display name of player to {newName::%player's uuid%}
+            send "&eYou have been assigned a new name: &f%{newName::%player's uuid%}%" to player
+            close player's inventory
+            stop
+
+# Maplewoodian Female Set Name            
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is stone named "&dMaplewood Female":
+            set {firstName} to random element out of {femalefirstNames::*}
+            set {lastName} to random element out of {lastNames::*}
+            set {newName::%player's uuid%} to "%{firstName}% %{lastName}%"
+            set display name of player to {newName::%player's uuid%}
+            send "&eYou have been assigned a new name: &f%{newName::%player's uuid%}%" to player
+            wait 1 second
+            close player's inventory
+     
+     
+   
+        
+# Male Foreign/Maplewoodian         
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        (rows of metadata tag "vanillaGUI" of player) = 4
+        loop 4 times:
+            loop 4 times:
+                if index of event-slot = (((loop-number-2)-1)+(9) * ((loop-number-1)-1)) + 5:
+                    set metadata tag "vanillaGUI" of player to chest inventory with 3 rows named "&3Foreign &for &bMaplewood"
+                    set slot 11 of metadata tag "vanillaGUI" of player to oak log named "&3Foreign Male"
+                    set slot 15 of metadata tag "vanillaGUI" of player to stone named "&bMaplewood Male"
+                    open (metadata tag "vanillaGUI" of player) to player
+                    set {gender::%player's uuid%} to "m"
+
+#Foreign Male Set Name
+     
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is oak log named "&3Foreign Male":
+            set {firstName} to random element out of {maleforeignfirstNames::*}
+            set {lastName} to random element out of {foreignlastNames::*}
+            set {newName::%player's uuid%} to "%{firstName}% %{lastName}%"
+            set display name of player to {newName::%player's uuid%}
+            send "&eYou have been assigned a new name: &f%{newName::%player's uuid%}%" to player
+            close player's inventory
+            
+# Maplewoodian Male Set Name            
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is stone named "&bMaplewood Male":
+            set {firstName} to random element out of {malefirstNames::*}
+            set {lastName} to random element out of {lastNames::*}
+            set {newName::%player's uuid%} to "%{firstName}% %{lastName}%"
+            set display name of player to {newName::%player's uuid%}
+            send "&eYou have been assigned a new name: &f%{newName::%player's uuid%}%" to player
+            close player's inventory

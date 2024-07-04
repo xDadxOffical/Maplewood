@@ -1,0 +1,13 @@
+
+# &bCocaine
+
+on load:
+    register new shaped recipe for sugar named "&bCocaine" using sugar, sugar, sugar, sugar named "&eCocaine Hydrochloride", sugar named "&eCocaine Hydrochloride", sugar named "&eCocaine Hydrochloride", sugar, sugar, sugar with id "firstdrug"
+
+# &eCocaine Hydrochloride
+
+on load:
+    register new shaped recipe for sugar named "&eCocaine Hydrochloride" using cocoa beans, cocoa beans, cocoa beans, cocoa beans, cocoa beans, cocoa beans, cocoa beans, cocoa beans, cocoa beans with id "cocaineee"
+    
+on load:
+    register new shaped recipe for large fern named "&2Marijuana" using wheat seed named "&2Marijuana Seed", wheat seed named "&2Marijuana Seed", wheat seed named "&2Marijuana Seed", sugar cane, water bucket, sugar cane, sugar cane, sugar cane, sugar cane with id "marijuana"

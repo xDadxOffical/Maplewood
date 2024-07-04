@@ -1,0 +1,202 @@
+command /getrecipes:
+    trigger:
+        give player book named "&7Criminal Recipes"
+
+
+
+on right click:
+    if player is holding book named "&7Criminal Recipes":
+        set metadata tag "vanillaGUI" of player to chest inventory with 8 rows named "&7&lCriminal Recipes"
+        set slot 0 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 1 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 2 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 3 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 4 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 5 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 6 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 7 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 8 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 9 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 11 of metadata tag "vanillaGUI" of player to sugar named "&bCocaine Recipe"
+        set slot 10 of metadata tag "vanillaGUI" of player to cocoa bean named "&eCocaine Hydrochloride Recipe"
+        set slot 12 of metadata tag "vanillaGUI" of player to large fern named "&2Marijuana Recipe"
+        set slot 17 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 18 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 26 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 27 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 35 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 36 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 44 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 45 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 46 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 47 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 48 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 49 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 50 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 51 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 52 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 53 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        set slot 53 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+        open (metadata tag "vanillaGUI" of player) to player
+        
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        cancel event
+
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is sugar named "&bCocaine Recipe":
+            set metadata tag "vanillaGUI" of player to chest inventory with 5 rows named "&fCocaine"
+            set slot 0 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 1 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 2 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 3 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 4 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 5 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 6 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 7 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 8 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 9 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 10 of metadata tag "vanillaGUI" of player to sugar 
+            set slot 11 of metadata tag "vanillaGUI" of player to sugar 
+            set slot 12 of metadata tag "vanillaGUI" of player to sugar 
+            set slot 13 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 14 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 15 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 16 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 17 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 18 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 19 of metadata tag "vanillaGUI" of player to sugar named "&eCocaine Hydrochloride"
+            set slot 20 of metadata tag "vanillaGUI" of player to sugar named "&eCocaine Hydrochloride"
+            set slot 21 of metadata tag "vanillaGUI" of player to sugar named "&eCocaine Hydrochloride"
+            set slot 22 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 23 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 24 of metadata tag "vanillaGUI" of player to sugar named "&bCocaine"
+            set slot 25 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 26 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 27 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 28 of metadata tag "vanillaGUI" of player to sugar
+            set slot 29 of metadata tag "vanillaGUI" of player to sugar 
+            set slot 30 of metadata tag "vanillaGUI" of player to sugar 
+            set slot 31 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 32 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 33 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 34 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 35 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 36 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 37 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 38 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 39 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 40 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 41 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 42 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 43 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 44 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            open (metadata tag "vanillaGUI" of player) to player
+            
+#Cocaine Hydrochloride
+
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is cocoa bean named "&eCocaine Hydrochloride Recipe":
+            set metadata tag "vanillaGUI" of player to chest inventory with 5 rows named "&eCocaine Hydrochloride"
+            set slot 0 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 1 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 2 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 3 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 4 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 5 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 6 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 7 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 8 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 9 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 10 of metadata tag "vanillaGUI" of player to cocoa bean
+            set slot 11 of metadata tag "vanillaGUI" of player to cocoa bean 
+            set slot 12 of metadata tag "vanillaGUI" of player to cocoa bean
+            set slot 13 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 14 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 15 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 16 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 17 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 18 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 19 of metadata tag "vanillaGUI" of player to cocoa bean
+            set slot 20 of metadata tag "vanillaGUI" of player to cocoa bean
+            set slot 21 of metadata tag "vanillaGUI" of player to cocoa bean
+            set slot 22 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 23 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 24 of metadata tag "vanillaGUI" of player to sugar named "&eCocaine Hydrochloride"
+            set slot 25 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 26 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 27 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 28 of metadata tag "vanillaGUI" of player to cocoa bean
+            set slot 29 of metadata tag "vanillaGUI" of player to cocoa bean
+            set slot 30 of metadata tag "vanillaGUI" of player to cocoa bean
+            set slot 31 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 32 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 33 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 34 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 35 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 36 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 37 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 38 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 39 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 40 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 41 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 42 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 43 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 44 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            open (metadata tag "vanillaGUI" of player) to player
+            
+            
+# Marijuana
+
+on inventory click:
+    if event-inventory = (metadata tag "vanillaGUI" of player):
+        if event-item is large fern named "&2Marijuana Recipe":
+            set metadata tag "vanillaGUI" of player to chest inventory with 5 rows named "&2Marijuana"
+            set slot 0 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 1 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 2 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 3 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 4 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 5 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 6 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 7 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 8 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 9 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 10 of metadata tag "vanillaGUI" of player to wheat seed named "&2Marijuana Seed"
+            set slot 11 of metadata tag "vanillaGUI" of player to wheat seed named "&2Marijuana Seed"
+            set slot 12 of metadata tag "vanillaGUI" of player to wheat seed named "&2Marijuana Seed"
+            set slot 13 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 14 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 15 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 16 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 17 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 18 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 19 of metadata tag "vanillaGUI" of player to sugar cane 
+            set slot 20 of metadata tag "vanillaGUI" of player to water bucket
+            set slot 21 of metadata tag "vanillaGUI" of player to sugar cane
+            set slot 22 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 23 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 24 of metadata tag "vanillaGUI" of player to large fern named "&2Marijuana"
+            set slot 25 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 26 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 27 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 28 of metadata tag "vanillaGUI" of player to sugar cane
+            set slot 29 of metadata tag "vanillaGUI" of player to sugar cane
+            set slot 30 of metadata tag "vanillaGUI" of player to sugar cane
+            set slot 31 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 32 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 33 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 34 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 35 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 36 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 37 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 38 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 39 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 40 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 41 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 42 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 43 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            set slot 44 of metadata tag "vanillaGUI" of player to gray glass pane named "&f"
+            open (metadata tag "vanillaGUI" of player) to player

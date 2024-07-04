@@ -1,0 +1,15 @@
+command /blackmarkethere:
+    trigger:
+        set {blackmarketvillager} to player's location
+        execute console command " summon villager {blackmarketvillager} {NoAI:1}"
+        
+        
+on chat:
+    if message contains "##":
+        if player has permission "staff.chat.use":
+            set {_sections::*} to %player's message%" split at "#<#null> 
+            send "&aStaff Chat &8| &e%player% | %{_sections::2}%" to the command sender
+            cancel event
+            
+
+    

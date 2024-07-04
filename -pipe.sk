@@ -1,0 +1,44 @@
+on place:
+    if event-block is furnace:
+        if block 2 blocks below event-block is chain:
+            if block 2 above event-block is air:
+                if block 1 infront of event-block is air:
+                    set block 1 above event-block to bricks
+                    set block 2 above event-block to bricks
+                    send "&aSucess &8| &7You have &asucessfully &7connected to the &eeletrical system"
+        else:
+            send "&cError &8| &7You need &eEletrical Cable&7 below this to work."
+            cancel event
+
+on break:
+    if {furnace::*} contains event-block:
+        cancel event
+        send "no"
+        
+command /furnacelist:
+    trigger:
+        send "%{furnace::*}%"
+
+on break:
+    if event-block is furnace:
+        set block 2 above event-block to air
+        remove location 1 infront of event-block from {furnace::*}
+        remove location 2 above event-block from {furnace::*}
+        remove location 1 above event-block from {furnace::*}
+        set block 1 above event-block to air
+        set block 1 infront of event-block to air
+        
+on place:
+    if event-block is furnace named "&cDrug Furnace":
+        if block 2 blocks below event-block is chain:
+            if block 2 above event-block is air:
+                if block 1 infront of event-block is air:
+                    if block 1 to the left of event-block is air:
+                        set block 1 infront of event-block to stone brick slab
+                        set block 1 above event-block to stone bricks
+                        set block 2 above event-block to stone bricks
+                        send "&aSucess &8| &7You have &asucessfully &7connected to the &eeletrical system"
+        else:
+            send "&cError &8| &7You need &eEletrical Cable&7 below this to work."
+            cancel event
+            

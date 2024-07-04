@@ -1,0 +1,4 @@
+on right click:
+    if event-block is {nucleartest1}:
+        if event-block is lever:
+            send "e"

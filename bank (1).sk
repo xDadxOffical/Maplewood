@@ -1,0 +1,63 @@
+# Bank Skript?
+
+on break of gold block:
+    if player is in region "bankvault":
+        send "t"
+        execute console command "eco give %player% 8"
+        set block to air
+        wait 30 minutes
+        set block to gold block
+    else:
+        stop
+        
+on break of end rod:
+    if player is in region "bankvault":
+        broadcast "&a&lBank &8| &fThe bank is currently being &cROBBED"
+        wait 30 minutes
+        set block to end rod
+    else:
+        stop
+    
+
+        
+on chat:
+    if message contains "blud":
+        execute console command "ban %player% blud"
+        
+command /night:
+    trigger:
+        execute console command "effect give %player% night_vision infinite 1 true"
+        
+
+        
+
+        
+        
+command /tewewewe:
+    trigger:
+        execute console command "setblock 60 66 67 quartz_block"
+        execute console command "setblock 60 66 68 quartz_block"
+        execute console command "setblock 60 66 69 quartz_block"
+        wait 1 second    
+        execute console command "setblock 60 66 68 air"
+        execute console command "setblock 60 66 69 air"
+        execute console command "setblock 61 66 67 quartz_block"
+        execute console command "setblock 62 66 67 quartz_block"
+        wait 1 second
+        execute console command "setblock 61 66 67 air"
+        execute console command "setblock 62 66 67 air"
+        execute console command "setblock 60 66 66 quartz_block"
+        execute console command "setblock 60 66 65 quartz_block" 
+        wait 1 second
+        execute console command "setblock 60 66 66 air"
+        execute console command "setblock 60 66 65 air"
+        execute console command "setblock 59 66 67 quartz_block"
+        execute console command "setblock 58 66 67 quartz_block" 
+        
+command /broadcast <text>:
+    aliases: /bc
+    permission: maplewood.broadcast
+    trigger:
+        broadcast "<##fb225c>M<##fb2f61>a<##fc3b67>p<##fc486c>l<##fc5572>e<##fc6177>w<##fd6e7c>o<##fd7a82>o<##fd8787>d &8| &e%arg-1%"
+
+        

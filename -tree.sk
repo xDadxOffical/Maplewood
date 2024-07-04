@@ -1,0 +1,15 @@
+# Tree Skript
+
+on right click:
+    if event-block is spruce log:
+        cancel event
+    
+on break of spruce log:
+    if player is in region "spruceforest":
+        give player 1 of spruce log
+        set block to bedrock
+        wait 5 seconds
+        set block to spruce log
+    else:
+        stop
+    

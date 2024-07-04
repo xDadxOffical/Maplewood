@@ -1,0 +1,5 @@
+command /scan <player>:
+    permission: *
+    trigger:
+        send component mini message from "<gradient:##bf0606 :##e02504>━━━━━━━━━━━━━━━━━━━━━━<reset>"
+        send "a" to executor

@@ -1,0 +1,6 @@
+command /camcreate:
+    trigger:
+        set {cam} to player's location
+on damage:
+    if attacker's location is within 10 blocks around {cam}:
+        broadcast "caught in 4k"

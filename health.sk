@@ -1,0 +1,88 @@
+on damage:
+    set {_distance} to victim's fall distance 
+    if {_distance} >= 6:
+        send "&b&lHEALTH &8| &7<rw You have broken your leg!>" to victim
+        send "&b&lHEALTH &8| &7To view your list of health issues, type /health." to victim
+        set {brokenleg::%victim's uuid%} to true
+
+every 10 seconds:
+    loop all players:
+        if {brokenleg::%loop-player's uuid%} is true:
+            apply potion of slowness 3 without particles to {brokenleg::*} for 10 seconds
+
+# COLD ----------
+function cold():
+    delete {cold::*}
+    add random element of all players in world "Maplewood" to {cold::*}
+    send "&b&lHEALTH &8| &7<rw You have caught a cold!>" to {cold::*}
+    send "&b&lHEALTH &8| &7To view your list of health issues, type /health." to {cold::*}
+    set {time} to "%random number between 5 and 20% minutes" parsed as timespan
+    wait {time}
+    send "&b&lHEALTH &8| &7<rw Your cold has naturally gone away!>" to {cold::*}
+    send "&b&lHEALTH &8| &7To view your list of health issues, type /health." to {cold::*}
+    cold()
+
+every 10 seconds:
+    if {cold::*} is online:
+        apply potion of weakness 1 without particles to {cold::*} for 10 seconds
+
+on consume of potion:
+    if {cold::*} contains event-player:
+        if name of event-item is "&dCold Medicine":
+            cold()
+            send "&b&lHEALTH &8| &7<rw Your cold has naturally gone away!>" to {cold::*}
+            send "&b&lHEALTH &8| &7To view your list of health issues, type /health." to {cold::*}
+
+command /cold:
+    permission: *
+    trigger:
+        cold()
+# COLD ----------
+
+
+
+
+
+
+
+
+
+
+
+
+# ---------------------------------------------------------------
+
+command /blud:
+    permission: *
+    trigger:
+        set {_p} to 1.5
+        set {_w} to 1
+        loop 10 times:
+            remove 0.1 from {_w}
+            remove 0.15 from {_p}
+            set {_wait} to "%{_w}% seconds" parsed as timespan
+            play sound "ENTITY_PANDA_SNEEZE" with volume 1 and pitch {_p} to player
+            send title "%color(loop-number)%&lBlud." with subtitle "" to player for 1 second
+            wait {_wait}
+            
+function color(n: number) :: string:
+    if {_n} is 1:
+        return "<##26c2ff>&l"
+    else if {_n} is 2:
+        return "<##ff2626>&l"
+    else if {_n} is 3:
+        return "<##26c2ff>&l"
+    else if {_n} is 4:
+        return "<##ff2626>&l"
+    else if {_n} is 5:
+        return "<##26c2ff>&l"
+    else if {_n} is 6:
+        return "<##ff2626>&l"
+    else if {_n} is 7:
+        return "<##26c2ff>&l"
+    else if {_n} is 8:
+        return "<##ff2626>&l"
+    else if {_n} is 9:
+        return "<##26c2ff>&l"
+    else if {_n} is 10:
+        return "<##ff2626>&l"

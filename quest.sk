@@ -1,0 +1,29 @@
+command /questbegin <text>:
+    trigger:
+        if arg-1 is "prison":
+            teleport player to {prisonloc1}
+            send "&aWhat was once Maplewoods biggest prison..."
+            wait 2 seconds
+            send "&aNow has fallen into ruins..."
+            wait 1 second
+            send "&aIt has now been over run by criminals.. drug dealers"
+            wait 2 second
+            send "&aYour goal is to kill all of these criminals and if you do this you will be greatly rewarded."
+            wait 3 seconds
+            send "&cBegin!"
+            wait 2 seconds
+            teleport player to {prisonloc2}
+        else:
+            send "&aInvalid Quest - Quests: prison"
+            
+command /setquestlocation <text>:
+    trigger:
+        if arg-1 is "prison1":
+            set {prisonloc1} to player's location
+            send "set location to %{prisonloc1}%"
+        else if arg-1 is "prison2":
+            set {prisonloc2} to player's location
+            send "set location to %{prisonloc2}%"
+        else:
+            send "you idiot looking back at this you are meant to type prison1 :skull:"
+            stop
