@@ -9,6 +9,16 @@ every 10 seconds:
     loop all players:
         if {brokenleg::%loop-player's uuid%} is true:
             apply potion of slowness 3 without particles to {brokenleg::*} for 10 seconds
+on right click:
+    if event-item is stick named "&bCURE":
+        remove player from {brokenleg::*}
+        send "&b&lHEALTH &8| <rw You are using a illegal cure made by xdadx pls dont tell cake she will kill me>"
+        remove 1 stick named "eee" from player
+        execute console command "effect clear %player%"
+        
+command /getcurelol:
+    trigger:
+        give player stick named "&bCURE"
 
 # COLD ----------
 function cold():
