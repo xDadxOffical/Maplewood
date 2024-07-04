@@ -44,7 +44,7 @@ on placeholderapi placeholder request for the prefix "skript":
         
 
 
-# CANTEEEEEENSSSS
+# CANTEEEEEENSSSS (easier for players but not needed, could just stick to water bottles (not sure if the code for those is included in here though))
 on first join:
 	set {thirst::player's uuid.yay} to "false"
 
