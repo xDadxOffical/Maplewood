@@ -1,3 +1,5 @@
+# Last names and first names will have to be manually set, what you see is a bugfix that was put, due to the server crashing with the long list of names that we used. Luckily skript saved the variables into the lists and so we had that, I may upload the data from that so they will still be there
+
 on load:
     set {femaleforeignfirstNames::*} to {femaleforeignfirstNames::*}
     set {foreignlastNames::*} to {foreignlastNames::*}
