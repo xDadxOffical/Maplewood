@@ -1,4 +1,4 @@
-# Tree Skript
+# Unfinished, would've been for a tree cutting system for forests.
 
 on right click:
     if event-block is spruce log:
