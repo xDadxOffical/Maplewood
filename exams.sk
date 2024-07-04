@@ -1,3 +1,5 @@
+# Absolutely unfinished, tbh i wouldn't even touch it with a ten foot pole :p
+
 command /createexam <text>:
     permission: exam.admin
     trigger:
